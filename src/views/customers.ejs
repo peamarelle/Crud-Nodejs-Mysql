@@ -4,34 +4,39 @@
     <div class="row mt-5">
         <div class="col-md-7">
             <table class="table table-bordered table-hover">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Actions</th>
-                </thead>
+               <% if(data.length === 0) { %>
+                <thead>There isn´t any customer</thead>
+                <% } else { %>
+                    <thead>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </thead>
+                <% } %>
                 <tbody>
                     <% if(data) { %>
-                        <% data.forEach(element => { %>
+                        <% for(i = 0; i< data.length; i++) { %>
                             <tr>
                                 <td>
-                                    <%= element.id %>
+                                    <%= i + 1 %>
                                 </td>
                                 <td>
-                                    <%= element.name %>
+                                    <%= data[i].name %>
                                 </td>
                                 <td>
-                                    <%= element.address %>
+                                    <%=  data[i].address %>
                                 </td>
                                 <td>
-                                    <%= element.phone %>
+                                    <%=  data[i].phone %>
                                 </td>
                                 <td>
-                                    <a href="/delete/<% element.id %>" class="btn btn-danger">Delete</a>
+                                    <a href="/delete/<%= data[i].id %>" class="btn btn-danger">Delete</a>
+                                    <a href="/update/<%= data[i].id %>" class="btn btn-info">Update</a>
                                 </td>
                             </tr>
-                        <% }) %>
+                        <% } %>
                     <% } %>
                 </tbody>
             </table>
